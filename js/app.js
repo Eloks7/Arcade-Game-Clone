@@ -67,12 +67,19 @@ class Player {
         if (this.x < 0) {
             this.x = 0;
         }
-        if (this.y > 500)
+        if (this.y > 500) {
+            this.y = 500;
+        }
+
+        if (this.y < 0) {
+            player.y = 400;
+            player.x = 210;
+        }
 
     }
 
     render() {
-
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
 
