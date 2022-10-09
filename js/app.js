@@ -53,11 +53,11 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    constructor(x, y, speed) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/char-boy.png';
-        this.speed = speed;
+        // this.speed = speed;
     }
 
     update() {
@@ -81,6 +81,24 @@ class Player {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+
+    handleInput(direction) {
+        switch (direction) {
+            case 'left':
+                this.x -= (this.speed + 100);
+                break;
+            case 'right':
+                this.x += (this.speed + 100);
+                break;
+            case 'down':
+                this.y += (this.speed + 100);
+                break;
+            case 'up':
+                this.y -= (this.speed + 100);
+                break;
+            
+        }
+    }
 }
 
 
@@ -88,6 +106,8 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+let allEnemies = [ new Enemy(0, 60, 220), new Enemy(0, 145, 300), new Enemy(0, 230, 430)];
+let player = new Player(210, 400);
 
 
 // This listens for key presses and sends the keys to your
