@@ -21,14 +21,27 @@
 //     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 // };
 class Enemy {
-    constructor(x, y, sprite) {
+    constructor(x, y, speed) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/enemy-bug.png';
+        this.speed = speed;
     }
 
     update(dt) {
+        this.x += this.speed * dt;
 
+        if (this.x > 505) {
+            this.x = -10;
+        }
+        // checking for collision
+        if (player.x < this.x + 50 &&
+            50 + player.x < this.x &&
+            player.y > this.y + 25 && 
+            25 + player.y > this.y ) {
+                player.y = 390;
+                player.x = 210;
+        }
     }
 
     render() {
@@ -40,10 +53,11 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    constructor(x, y, sprite) {
+    constructor(x, y, speed) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/char-boy.png';
+        this.speed = speed;
     }
 
     update(dt) {
