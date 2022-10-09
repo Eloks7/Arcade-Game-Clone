@@ -39,7 +39,7 @@ class Enemy {
             50 + player.x < this.x &&
             player.y > this.y + 25 && 
             25 + player.y > this.y ) {
-                player.y = 390;
+                player.y = 400;
                 player.x = 210;
         }
     }
@@ -60,7 +60,14 @@ class Player {
         this.speed = speed;
     }
 
-    update(dt) {
+    update() {
+        if (this.x > 505) {
+            this.x = 505;
+        }        
+        if (this.x < 0) {
+            this.x = 0;
+        }
+        if (this.y > 500)
 
     }
 
