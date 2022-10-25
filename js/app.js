@@ -53,11 +53,11 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    constructor(x, y, speed) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/char-boy.png';
-        this.speed = speed;
+        // this.speed = speed;
     }
 
     update() {
@@ -122,3 +122,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+  
