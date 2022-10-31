@@ -34,13 +34,13 @@ class Enemy {
         if (this.x > 505) {
             this.x = -10;
         }
-        // checking for collision
-        if (player.x < this.x + 50 &&
-            50 + player.x < this.x &&
-            player.y > this.y + 25 && 
-            25 + player.y > this.y ) {
-                player.y = 400;
-                player.x = 210;
+
+        if (player.x < this.x + 50.5 &&
+            player.x + 50.5 > this.x &&
+            player.y < this.y + 25 &&
+            30 + player.y > this.y) {
+            player.x = 210;
+            player.y = 400;
         }
     }
 
@@ -61,20 +61,30 @@ class Player {
     }
 
     update() {
-        if (this.x > 505) {
-            this.x = 505;
+        // stop player from going off canvas
+        if (this.x > 400) {
+            this.x = 400;
         }        
         if (this.x < 0) {
             this.x = 0;
         }
-        if (this.y > 500) {
-            this.y = 500;
+        if (this.y > 400) {
+            this.y = 400;
         }
 
         if (this.y < 0) {
             player.y = 400;
             player.x = 210;
+        };
+
+        // check for collision
+        for (let enemy of allEnemies) {
+            if (this.y === enemy.y && (enemy.x + 50.5 > this.x && enemy.x < this.x + 50.5)){
+                this.x = 210;
+                this.y = 400;
+            }
         }
+
 
     }
 
@@ -82,19 +92,19 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    handleInput(keyCode) {
-        switch (keyCode) {
+    handleInput(allowedKeys) {
+        switch (allowedKeys) {
             case 'left':
-                this.x -= (this.speed + 100);
+                this.x -= 100;
                 break;
             case 'right':
-                this.x += (this.speed + 100);
+                this.x += 100;
                 break;
             case 'down':
-                this.y += (this.speed + 83);
+                this.y += 83;
                 break;
             case 'up':
-                this.y -= (this.speed + 83);
+                this.y -= 83;
                 break;
             
         }
@@ -107,7 +117,7 @@ class Player {
 // Place the player object in a variable called player
 
 let allEnemies = [ new Enemy(0, 60, 220), new Enemy(0, 145, 300), new Enemy(0, 230, 430)];
-let player = new Player(210, 400, 20);
+let player = new Player(210, 400);
 
 
 // This listens for key presses and sends the keys to your
